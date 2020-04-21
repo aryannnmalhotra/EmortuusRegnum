@@ -137,11 +137,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: UVs
-    second: {fileID: 2100000, guid: 03c98c4b639a42a418c51e69431319ef, type: 2}
+    second: {fileID: 2100000, guid: ad7d617489b7868438898e488780b762, type: 2}
   materials:
     materialImportMode: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
     materialLocation: 0
   animations:
     legacyGenerateAnimations: 4

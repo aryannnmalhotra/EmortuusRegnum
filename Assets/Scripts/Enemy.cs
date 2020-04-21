@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         if(healthSystem.GetHealth() <= 0)
         {
             anim.SetBool("Die", true);
-            Destroy(this.gameObject, 7);
+            Destroy(this.gameObject, 4);
         }
     }
 }
