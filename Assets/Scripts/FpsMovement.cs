@@ -13,6 +13,10 @@ public class FpsMovement : MonoBehaviour
     public Transform GroundCheck;
     public float GroundDistance = .4f;
     public LayerMask GroundMask;
+    void Start() 
+    {
+
+    }
     void Update()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
