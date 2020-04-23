@@ -46,11 +46,11 @@ public class Scope : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                FpsCam.fieldOfView = Mathf.Clamp(FpsCam.fieldOfView - (15 * Time.deltaTime),5,50);
+                FpsCam.fieldOfView = Mathf.Clamp(FpsCam.fieldOfView - (15 * Time.deltaTime), 0, 50);
             }
             if (Input.GetKey(KeyCode.X))
             {
-                FpsCam.fieldOfView = Mathf.Clamp(FpsCam.fieldOfView + (15 * Time.deltaTime), 5, 50);
+                FpsCam.fieldOfView = Mathf.Clamp(FpsCam.fieldOfView + (15 * Time.deltaTime), 0, 50);
             }
         }
     }
