@@ -41,18 +41,14 @@ public class Enemy : MonoBehaviour
             if (zToAdd >= -1.5f && zToAdd <= 1.5f)
                 zToAdd *= 3;
             Vector3 patrolPoint = startPosition + new Vector3(xToAdd, 0, -(zToAdd));
-            taskManager.StartTask(new PatrolTask(taskManager, navAgent, patrolPoint));
+            taskManager.StartTask(new PatrolTask(taskManager, anim, navAgent, patrolPoint));
         }
-    }
-    void TempShootReset()
-    {
-        taskManager.HasTakenPreviousShot = true;
     }
     public void DamageInflicted(float damage)
     {
         navAgent.ResetPath();
         navAgent.isStopped = true;
-        taskManager.StartTask(new HurtTask(taskManager, anim, healthSystem, damage));
+        taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage));
     }
     void Update()
     {
@@ -66,21 +62,19 @@ public class Enemy : MonoBehaviour
             isActive = false;
         if (isActive)
         {
-            if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange && taskManager.HasTakenPreviousShot)
-                taskManager.StartTask(new ChaseTask(taskManager, navAgent, PlayerPosition.position));
-            if(navAgent.remainingDistance <= FireRange)
+            if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
+                taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
+            if(Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
             {
-                navAgent.ResetPath();
-                navAgent.isStopped = true;
-                taskManager.HasTakenPreviousShot = false;
-                taskManager.StartTask(new ShootTask(taskManager, anim, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2));
+                taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2));
             }
         }
         if(healthSystem.GetHealth() <= 0)
         {
             navAgent.ResetPath();
-            anim.SetBool("Die", true);
-            Destroy(this.gameObject, 4);
+            navAgent.isStopped = true;
+            taskManager.PriorityStartTask(new DieTask(taskManager, anim));
+            Destroy(gameObject, 4);
         }
     }
 }

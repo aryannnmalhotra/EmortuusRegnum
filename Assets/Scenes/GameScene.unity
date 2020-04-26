@@ -90565,9 +90565,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd62dfc0652d18459805d1092025305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpotRange: 14
+  SpotRange: 15
   FireRange: 7
-  EscapeRange: 20
+  EscapeRange: 25
   PatrolRadius: 5
   Weapon: {fileID: 1008038674}
   PlayerPosition: {fileID: 119519067}
@@ -90587,7 +90587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ba19d1afc40cb4787e6dae1b6a6161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasTakenPreviousShot: 1
 --- !u!1 &1704815705
 GameObject:
   m_ObjectHideFlags: 0

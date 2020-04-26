@@ -6,7 +6,6 @@ public class TaskManager : MonoBehaviour
 {
     private Queue<Task> pendingTasks = new Queue<Task>();
     private Task currentTask = null;
-    public bool HasTakenPreviousShot = true;
     private void Start()
     {
         StartTask(new Task(this));
@@ -30,7 +29,39 @@ public class TaskManager : MonoBehaviour
             currentTask = task;
             currentTask.Start();
         }
-
+    }
+    public void StartTaskWithoutQueue(Task task)
+    {
+        if (task == null)
+            return;
+        if (currentTask != null && currentTask != task)
+        {
+            if (currentTask.End())
+            {
+                currentTask = task;
+                currentTask.Start();
+            }
+        }
+        else
+        {
+            currentTask = task;
+            currentTask.Start();
+        }
+    }
+    public void PriorityStartTask(Task task)
+    {
+        if (task == null)
+            return;
+        if (currentTask != null && currentTask != task)
+        {
+            currentTask = task;
+            currentTask.Start();
+        }
+        else
+        {
+            currentTask = task;
+            currentTask.Start();
+        }
     }
     public void EndTask(Task task)
     {

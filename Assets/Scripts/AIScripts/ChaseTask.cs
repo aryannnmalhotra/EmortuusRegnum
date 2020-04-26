@@ -6,19 +6,19 @@ using UnityEngine.AI;
 public class ChaseTask : Task
 {
     private NavMeshAgent navAgent;
+    private Animator anim;
     private Vector3 destination;
-    public ChaseTask(TaskManager taskManager, NavMeshAgent navAgent, Vector3 destination) : base(taskManager)
+    public ChaseTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 destination) : base(taskManager)
     {
         this.navAgent = navAgent;
+        this.anim = anim;
         this.destination = destination;
     }
     public override bool Start()
     {
+        anim.SetBool("Aim", false);
         navAgent.isStopped = false;
         navAgent.speed = 4;
-        /*Vector3 direction = (destination - navAgent.gameObject.transform.position).normalized;
-        Quaternion directionalRotaion = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        navAgent.gameObject.transform.rotation = Quaternion.Slerp(navAgent.gameObject.transform.rotation, directionalRotaion, 4);*/
         navAgent.SetDestination(destination);
         return true;
     }
