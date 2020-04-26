@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navAgent;
     private TaskManager taskManager;
     private Vector3 startPosition;
+    public bool IsWeakerEnem;
     public float SpotRange = 10;
     public float FireRange = 4;
     public float EscapeRange = 16;
@@ -74,7 +75,6 @@ public class Enemy : MonoBehaviour
             navAgent.ResetPath();
             navAgent.isStopped = true;
             taskManager.PriorityStartTask(new DieTask(taskManager, anim));
-            Destroy(gameObject, 4);
         }
     }
 }

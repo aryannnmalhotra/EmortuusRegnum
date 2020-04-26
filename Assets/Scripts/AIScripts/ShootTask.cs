@@ -38,25 +38,27 @@ public class ShootTask : Task
     IEnumerator StartShooting()
     {
         yield return new WaitForSeconds(aimTime);
-        RaycastHit shot;
-        anim.SetBool("Fire", true);
-        flash.Play();
-        smoke1.Play();
-        smoke2.Play();
-        if (Physics.Raycast(bulletOrigin, -((bulletOrigin - target).normalized), out shot, 15))
-        {
-            if (shot.transform.GetComponent<FpsMovement>() != null)
+            RaycastHit shot;
+            if(!TaskManager.gameObject.GetComponent<Enemy>().IsWeakerEnem)
+               anim.SetBool("Fire", true);
+            flash.Play();
+            smoke1.Play();
+            smoke2.Play();
+            if (Physics.Raycast(bulletOrigin, -((bulletOrigin - target).normalized), out shot, 15))
             {
-                TaskManager.gameObject.GetComponent<Enemy>().FireRange = Mathf.Clamp(TaskManager.gameObject.GetComponent<Enemy>().FireRange + 3, 6, TaskManager.gameObject.GetComponent<Enemy>().EscapeRange - 1);
-                Debug.Log("Hit");
+                if (shot.transform.GetComponent<FpsMovement>() != null)
+                {
+                    TaskManager.gameObject.GetComponent<Enemy>().FireRange = Mathf.Clamp(TaskManager.gameObject.GetComponent<Enemy>().FireRange + 3, 6, TaskManager.gameObject.GetComponent<Enemy>().EscapeRange - 1);
+                    Debug.Log("Hit");
+                }
             }
-        }
         yield return new WaitForSeconds(0.5f);
-        anim.SetBool("Fire", false);
-        flash.Stop();
-        smoke1.Stop();
-        smoke2.Stop();
-        IsTaskComplete = true;
+            if (!TaskManager.gameObject.GetComponent<Enemy>().IsWeakerEnem)
+                anim.SetBool("Fire", false);
+            flash.Stop();
+            smoke1.Stop();
+            smoke2.Stop();
+            IsTaskComplete = true;
     }
     public override bool End()
     {

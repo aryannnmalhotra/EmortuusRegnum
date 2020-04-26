@@ -72,7 +72,7 @@ public class Gun : MonoBehaviour
                 StartCoroutine(Reload());
             return;
         }
-        if (Input.GetKeyDown(KeyCode.C) && Time.time >= currentFireStamp)
+        if (Input.GetKey(KeyCode.C) && Time.time >= currentFireStamp)
         {
             currentFireStamp = Time.time + 1 / FireRate;
             Shoot();

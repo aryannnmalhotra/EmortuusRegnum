@@ -5,8 +5,7 @@ using UnityEngine;
 public class DieTask : Task
 {
     Animator anim;
-    public DieTask(TaskManager taskManager, Animator anim)
-        : base(taskManager)
+    public DieTask(TaskManager taskManager, Animator anim) : base(taskManager)
     {
         this.anim = anim;
     }
@@ -19,8 +18,10 @@ public class DieTask : Task
     }
     IEnumerator SpawnCollectibles()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3.9f);
         // spawn logic
+        yield return new WaitForSeconds(0.1f);
+        TaskManager.Destroy(TaskManager.gameObject);
     }
 
     public override bool End()
