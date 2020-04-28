@@ -7,7 +7,6 @@ public class Scope : MonoBehaviour
     private bool isScoped;
     private Animator anim;
     public GameObject ScopeImage;
-    public GameObject Crosshair;
     public GameObject WeaponsCam;
     public Camera FpsCam;
     void Start()
@@ -27,14 +26,12 @@ public class Scope : MonoBehaviour
         {
             if (!isScoped)
             {
-                Crosshair.SetActive(false);
                 anim.SetBool("Scoped", true);
                 Invoke("ScopeActive", .15f);
                 isScoped = true;
             }
             else
             {
-                Crosshair.SetActive(true);
                 WeaponsCam.GetComponent<Camera>().enabled = true;
                 anim.SetBool("Scoped", false);
                 ScopeImage.SetActive(false);

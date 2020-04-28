@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    private bool isAimOn;
     private bool isReloading;
     private int currentAmmo;
     private float currentFireStamp;
     private Animator anim;
+    public bool IsSniper;
     public int AmmoPerRound = 5;
     public int ExtraRounds = 0;
     public float ReloadTime = 2.5f;
@@ -16,18 +18,22 @@ public class Gun : MonoBehaviour
     public float ShotForce = 10;
     public float FireRate = 5;
     public Camera FpsCam;
+    public GameObject Crosshair;
     public GameObject OnShot;
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
     void Start()
     {
+        isAimOn = false;
         isReloading = false;
         currentFireStamp = 0;
         currentAmmo = AmmoPerRound;
     }
     private void OnEnable()
     {
+        isAimOn = false;
+        Crosshair.SetActive(false);
         anim = GetComponent<Animator>();
         isReloading = false;
         anim.SetBool("Reload", false);
@@ -76,6 +82,11 @@ public class Gun : MonoBehaviour
         {
             currentFireStamp = Time.time + 1 / FireRate;
             Shoot();
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !IsSniper)
+        {
+            Crosshair.SetActive(!isAimOn);
+            isAimOn = !isAimOn;
         }
     }
 }

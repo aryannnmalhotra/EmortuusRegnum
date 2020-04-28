@@ -4205,6 +4205,7 @@ GameObject:
   - component: {fileID: 119519070}
   - component: {fileID: 119519072}
   - component: {fileID: 119519071}
+  - component: {fileID: 119519073}
   m_Layer: 0
   m_Name: FirstPersonShooter
   m_TagString: Player
@@ -4315,6 +4316,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5fc6b01ff487024aaf9a944a3215674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &119519073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119519065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fd4d90df1457543a0d2a8af61eb189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &120153696
@@ -14939,6 +14952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e77e59d3e9c60438ec9772cc7cf628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSniper: 0
   AmmoPerRound: 5
   ExtraRounds: 1
   ReloadTime: 2
@@ -14947,6 +14961,7 @@ MonoBehaviour:
   ShotForce: 25
   FireRate: 5
   FpsCam: {fileID: 963194227}
+  Crosshair: {fileID: 715238476}
   OnShot: {fileID: 6350672156391847330, guid: 477a73d94d67274448f8ed02a643f04d, type: 3}
   Flash: {fileID: 640942991}
   Smoke1: {fileID: 640942994}
@@ -19387,6 +19402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e77e59d3e9c60438ec9772cc7cf628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSniper: 1
   AmmoPerRound: 5
   ExtraRounds: 1
   ReloadTime: 5
@@ -19395,6 +19411,7 @@ MonoBehaviour:
   ShotForce: 60
   FireRate: 0.5
   FpsCam: {fileID: 963194227}
+  Crosshair: {fileID: 715238476}
   OnShot: {fileID: 6350672156391847330, guid: 477a73d94d67274448f8ed02a643f04d, type: 3}
   Flash: {fileID: 816242740}
   Smoke1: {fileID: 341008671}
@@ -19431,7 +19448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScopeImage: {fileID: 451510477}
-  Crosshair: {fileID: 715238476}
   WeaponsCam: {fileID: 1053657949}
   FpsCam: {fileID: 963194227}
 --- !u!1 &573949689
@@ -20448,6 +20464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e77e59d3e9c60438ec9772cc7cf628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSniper: 0
   AmmoPerRound: 5
   ExtraRounds: 1
   ReloadTime: 4
@@ -20456,6 +20473,7 @@ MonoBehaviour:
   ShotForce: 50
   FireRate: 10
   FpsCam: {fileID: 963194227}
+  Crosshair: {fileID: 715238476}
   OnShot: {fileID: 6350672156391847330, guid: 477a73d94d67274448f8ed02a643f04d, type: 3}
   Flash: {fileID: 1301533950}
   Smoke1: {fileID: 1483369375}
@@ -29126,7 +29144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &715238477
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59067,7 +59085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
       propertyPath: m_Layer
@@ -59175,6 +59193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e77e59d3e9c60438ec9772cc7cf628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSniper: 0
   AmmoPerRound: 5
   ExtraRounds: 1
   ReloadTime: 3
@@ -59183,6 +59202,7 @@ MonoBehaviour:
   ShotForce: 40
   FireRate: 2
   FpsCam: {fileID: 963194227}
+  Crosshair: {fileID: 715238476}
   OnShot: {fileID: 6350672156391847330, guid: 477a73d94d67274448f8ed02a643f04d, type: 3}
   Flash: {fileID: 2472407331400315849}
   Smoke1: {fileID: 2472407331400315853}
@@ -90773,7 +90793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsWeakerEnem: 0
-  ShotDamage: 10
+  ShotDamage: 15
   SpotRange: 15
   FireRange: 7
   EscapeRange: 25

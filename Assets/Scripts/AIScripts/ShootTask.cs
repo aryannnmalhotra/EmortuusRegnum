@@ -29,6 +29,7 @@ public class ShootTask : Task
     public override bool Start()
     {
         navAgent.ResetPath();
+        navAgent.speed = 0;
         navAgent.isStopped = true;
         var direction = (TaskManager.gameObject.transform.position - target).normalized;
         Quaternion directionalRotaion = Quaternion.LookRotation(-(new Vector3(direction.x, 0, direction.z)));

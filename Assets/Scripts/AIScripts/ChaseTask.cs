@@ -18,7 +18,7 @@ public class ChaseTask : Task
     {
         anim.SetBool("Aim", false);
         navAgent.isStopped = false;
-        navAgent.speed = 4;
+        navAgent.speed = 5;
         navAgent.SetDestination(destination);
         return true;
     }
