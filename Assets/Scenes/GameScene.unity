@@ -4203,6 +4203,8 @@ GameObject:
   - component: {fileID: 119519068}
   - component: {fileID: 119519069}
   - component: {fileID: 119519070}
+  - component: {fileID: 119519072}
+  - component: {fileID: 119519071}
   m_Layer: 0
   m_Name: FirstPersonShooter
   m_TagString: Player
@@ -4236,7 +4238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119519065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.08, y: 1.46, z: -16.55}
+  m_LocalPosition: {x: -19.54, y: 1.46, z: -35.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -4291,6 +4293,30 @@ CapsuleCollider:
   m_Height: 2.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &119519071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119519065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 812557a40d0114b4da4e1a61b606b2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &119519072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119519065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fc6b01ff487024aaf9a944a3215674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &120153696
 GameObject:
   m_ObjectHideFlags: 0
@@ -15157,7 +15183,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -90186,7 +90212,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 15eb48e7d28c78f4e888e2aa293232f3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -650382798008282385, guid: 15eb48e7d28c78f4e888e2aa293232f3,
         type: 3}
@@ -90747,6 +90773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsWeakerEnem: 0
+  ShotDamage: 10
   SpotRange: 15
   FireRange: 7
   EscapeRange: 25
@@ -103165,6 +103192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82c4dc057b813c8408423fe7d86c3714,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82c4dc057b813c8408423fe7d86c3714, type: 3}
 --- !u!1 &1918865770 stripped
@@ -103210,6 +103242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsWeakerEnem: 1
+  ShotDamage: 10
   SpotRange: 15
   FireRange: 7
   EscapeRange: 25

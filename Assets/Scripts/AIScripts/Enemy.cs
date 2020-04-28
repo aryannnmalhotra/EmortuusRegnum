@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private TaskManager taskManager;
     private Vector3 startPosition;
     public bool IsWeakerEnem;
+    public float ShotDamage = 10;
     public float SpotRange = 10;
     public float FireRange = 4;
     public float EscapeRange = 16;
@@ -49,32 +50,40 @@ public class Enemy : MonoBehaviour
     {
         navAgent.ResetPath();
         navAgent.isStopped = true;
-        taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage));
+        if(IsWeakerEnem)
+            taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage * 2));
+        else
+            taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage));
     }
     void Update()
     {
         anim.SetFloat("WalkSpeed", navAgent.velocity.magnitude);
-        if (Vector3.Distance(transform.position, PlayerPosition.position) <= SpotRange && !isActive)
+        if (FpsAttributes.IsAlive)
         {
-            isActive = true;
-            navAgent.ResetPath();
-        }
-        if (Vector3.Distance(transform.position, PlayerPosition.position) > EscapeRange && isActive)
-            isActive = false;
-        if (isActive)
-        {
-            if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
-                taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
-            if(Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
+            if (Vector3.Distance(transform.position, PlayerPosition.position) <= SpotRange && !isActive)
             {
-                taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2));
+                isActive = true;
+                navAgent.ResetPath();
             }
-        }
-        if(healthSystem.GetHealth() <= 0)
-        {
-            navAgent.ResetPath();
-            navAgent.isStopped = true;
-            taskManager.PriorityStartTask(new DieTask(taskManager, anim));
+            if (Vector3.Distance(transform.position, PlayerPosition.position) > EscapeRange && isActive)
+                isActive = false;
+            if (isActive)
+            {
+                if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
+                    taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
+                if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
+                {
+                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
+                }
+            }
+            if (healthSystem.GetHealth() <= 0)
+            {
+                navAgent.ResetPath();
+                navAgent.isStopped = true;
+                taskManager.PriorityStartTask(new DieTask(taskManager, anim));
+            }
+            else
+                isActive = false;
         }
     }
 }

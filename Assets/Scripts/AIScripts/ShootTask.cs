@@ -12,8 +12,9 @@ public class ShootTask : Task
     private ParticleSystem flash;
     private ParticleSystem smoke1;
     private ParticleSystem smoke2;
+    private float shotDamage;
     private float aimTime;
-    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2) : base(taskManager)
+    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2, float shotDamage) : base(taskManager)
     {
         this.anim = anim;
         this.navAgent = navAgent;
@@ -22,6 +23,7 @@ public class ShootTask : Task
         this.flash = flash;
         this.smoke1 = smoke1;
         this.smoke2 = smoke2;
+        this.shotDamage = shotDamage;
         aimTime = Random.Range(0.5f, 1.5f);
     }
     public override bool Start()
@@ -46,10 +48,12 @@ public class ShootTask : Task
             smoke2.Play();
             if (Physics.Raycast(bulletOrigin, -((bulletOrigin - target).normalized), out shot, 15))
             {
-                if (shot.transform.GetComponent<FpsMovement>() != null)
+                if (shot.transform.GetComponent<FpsAttributes>() != null)
                 {
                     TaskManager.gameObject.GetComponent<Enemy>().FireRange = Mathf.Clamp(TaskManager.gameObject.GetComponent<Enemy>().FireRange + 3, 6, TaskManager.gameObject.GetComponent<Enemy>().EscapeRange - 1);
-                    Debug.Log("Hit");
+                    int armourFactor = shot.transform.GetComponent<ArmourSystem>().GetArmourLevel();
+                    shot.transform.GetComponent<ArmourSystem>().TakeHit();
+                    shot.transform.GetComponent<HealthSystem>().DecreaseHealth(shotDamage - (armourFactor * ((5 * shotDamage) / 100)));
                 }
             }
         yield return new WaitForSeconds(0.5f);

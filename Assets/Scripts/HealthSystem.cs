@@ -17,12 +17,4 @@ public class HealthSystem : MonoBehaviour
     {
         health = Mathf.Clamp(health - factor, 0, 100);
     }
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        
-    }
 }
