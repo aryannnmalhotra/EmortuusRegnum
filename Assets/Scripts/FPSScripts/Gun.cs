@@ -33,7 +33,6 @@ public class Gun : MonoBehaviour
     private void OnEnable()
     {
         isAimOn = false;
-        Crosshair.SetActive(false);
         anim = GetComponent<Animator>();
         isReloading = false;
         anim.SetBool("Reload", false);

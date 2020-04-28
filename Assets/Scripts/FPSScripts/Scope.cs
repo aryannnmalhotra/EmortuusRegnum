@@ -14,6 +14,13 @@ public class Scope : MonoBehaviour
         anim = GetComponent<Animator>();
         isScoped = false;
     }
+    private void OnDisable()
+    {
+        isScoped = false;
+        WeaponsCam.GetComponent<Camera>().enabled = true;
+        ScopeImage.SetActive(false);
+        FpsCam.fieldOfView = 60;
+    }
     void ScopeActive()
     {
         ScopeImage.SetActive(true);

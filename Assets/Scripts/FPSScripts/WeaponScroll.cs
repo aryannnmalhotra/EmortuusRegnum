@@ -5,9 +5,6 @@ using UnityEngine;
 public class WeaponScroll : MonoBehaviour
 {
     private int currentWeapon;
-    public GameObject Crosshair;
-    public GameObject ScopeImage;
-    public Camera FpsCam;
     void Start()
     {
         currentWeapon = 0;
@@ -20,10 +17,6 @@ public class WeaponScroll : MonoBehaviour
         {
             if (currentWeapon == i)
             {
-                FpsCam.fieldOfView = 60;
-                Crosshair.SetActive(true);
-                ScopeImage.SetActive(false);
-                gameObject.GetComponent<Camera>().enabled = true;
                 weapon.gameObject.SetActive(true);
             }
             else
