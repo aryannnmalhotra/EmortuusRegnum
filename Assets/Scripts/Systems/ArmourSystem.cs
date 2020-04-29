@@ -9,7 +9,7 @@ public class ArmourSystem : MonoBehaviour
     private int upgradeCost = 5000;
     private int mendTime = 1;
     private int hits = 0;
-    private int hitLimit = 2;
+    private int hitLimit = 3;
     public bool IsMending;
     public GameObject WeaponsCam;
     public void TakeHit()
@@ -55,6 +55,6 @@ public class ArmourSystem : MonoBehaviour
         armourLevelState = armourLevel;
         upgradeCost = Mathf.Clamp(upgradeCost + 5000, 0, 50000);
         mendTime = Mathf.Clamp(mendTime + 1, 0, 10);
-        hitLimit = Mathf.Clamp(hitLimit + 1, 0, 20);
+        hitLimit = Mathf.Clamp(hitLimit + 2, 0, 20);
     }
 }

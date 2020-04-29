@@ -4391,7 +4391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsMending: 0
   WeaponsCam: {fileID: 1053657949}
-  Inventory: {fileID: 119519074}
 --- !u!114 &119519072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74794,7 +74793,6 @@ GameObject:
   - component: {fileID: 1327228292}
   - component: {fileID: 1327228294}
   - component: {fileID: 1327228293}
-  - component: {fileID: 1327228295}
   m_Layer: 5
   m_Name: KeyPressIndicator
   m_TagString: Untagged
@@ -74861,23 +74859,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327228291}
   m_CullTransparentMesh: 0
---- !u!114 &1327228295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327228291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c656741bf1fe0e046b5fe24b5de7443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerArmour: {fileID: 0}
-  PlayerMoney: {fileID: 0}
-  CostText: {fileID: 0}
-  DetailsText: {fileID: 0}
-  ToUpgrade: {fileID: 0}
 --- !u!1 &1328919513
 GameObject:
   m_ObjectHideFlags: 0
