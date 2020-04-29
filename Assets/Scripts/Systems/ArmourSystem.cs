@@ -6,21 +6,32 @@ public class ArmourSystem : MonoBehaviour
 {
     private int armourLevel = 0;
     private int armourLevelState;
-    private float upgradeCost;
-    private float mendCost;
-    private float hits = 0;
+    private int upgradeCost = 5000;
+    private int mendTime = 1;
+    private int hits = 0;
+    private int hitLimit = 5;
+    public GameObject WeaponsCam;
     public void TakeHit()
     {
-        hits++;
-        if (hits % 10 == 0)
+        if (armourLevelState == armourLevel)
         {
-            hits = 0;
-            armourLevelState = 0;
+            ++hits;
+            if (hits % hitLimit == 0)
+            {
+                hits = 0;
+                armourLevelState = 0;
+            }
         }
     }
     public void MendArmour()
     {
-        armourLevelState = armourLevel;
+        StartCoroutine(Mending());
+    }
+    IEnumerator Mending()
+    {
+        WeaponsCam.SetActive(false);
+        yield return new WaitForSeconds(mendTime);
+        WeaponsCam.SetActive(true);
     }
     public int GetArmourLevel()
     {
@@ -30,20 +41,16 @@ public class ArmourSystem : MonoBehaviour
     {
         return armourLevelState;
     }
-    public float GetMendCost()
-    {
-        return mendCost;
-    }
-    public float GetUpgradeCost()
+    public int GetUpgradeCost()
     {
         return upgradeCost;
     }
-    public void SetMendCost(float newCost)
+    public void Upgrade()
     {
-        mendCost = newCost;
-    }
-    public void SetUpgradeCost(float newCost)
-    {
-        upgradeCost = newCost;
+        armourLevel = Mathf.Clamp(armourLevel + 1, 0, 10);
+        armourLevelState = armourLevel;
+        upgradeCost = Mathf.Clamp(upgradeCost + 5000, 0, 50000);
+        mendTime = Mathf.Clamp(mendTime + 1, 0, 10);
+        hitLimit = Mathf.Clamp(hitLimit + 3, 0, 20);
     }
 }

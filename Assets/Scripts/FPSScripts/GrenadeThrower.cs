@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class GrenadeThrower : MonoBehaviour
 {
-    private float currentGrenadeCount;
+    private int currentGrenadeCount;
+    public int MaxGrenadeCount = 20;
     public float ThrowForce = 16;
-    public float MaxGrenadeCount = 10;
     public GameObject Grenade;
     void Start()
     {
         currentGrenadeCount = MaxGrenadeCount;
+    }
+    public bool CanBuyGrenade()
+    {
+        if (currentGrenadeCount == MaxGrenadeCount)
+            return false;
+        else
+            return true;
+    }
+    public void BuyGrenade()
+    {
+        currentGrenadeCount = Mathf.Clamp(currentGrenadeCount + 1, 0, MaxGrenadeCount);
+    }
+    public int GetGrenadeCount()
+    {
+        return currentGrenadeCount;
     }
     void ThrowGrenade()
     {

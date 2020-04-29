@@ -59,7 +59,7 @@ public class ShootTask : Task
                     TaskManager.gameObject.GetComponent<Enemy>().FireRange = Mathf.Clamp(TaskManager.gameObject.GetComponent<Enemy>().FireRange + 3, 6, TaskManager.gameObject.GetComponent<Enemy>().EscapeRange - 1);
                     int armourFactor = shot.transform.GetComponent<ArmourSystem>().GetArmourLevelState();
                     shot.transform.GetComponent<ArmourSystem>().TakeHit();
-                    shot.transform.GetComponent<HealthSystem>().DecreaseHealth(shotDamage - (armourFactor * ((5 * shotDamage) / 100)));
+                    shot.transform.GetComponent<HealthSystem>().DecreaseHealth(shotDamage - (armourFactor * ((7 * shotDamage) / 100)));
                 }
             }
         yield return new WaitForSeconds(0.5f);

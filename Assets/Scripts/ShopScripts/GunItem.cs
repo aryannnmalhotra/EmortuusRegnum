@@ -9,7 +9,7 @@ public class GunItem : MonoBehaviour
     public MoneySystem PlayerMoney;
     public Text CostText;
     public Text DetailsText;
-    void Start()
+    private void OnEnable()
     {
         CostText.text = "$" + AmmoCost.ToString();
         DetailsText.text = GunType.GetCurrentAmmo().ToString() + "/" + ((GunType.ExtraRounds + 1) * GunType.AmmoPerRound).ToString();

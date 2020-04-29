@@ -24,12 +24,15 @@ public class Gun : MonoBehaviour
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
+    private void Awake()
+    {
+        currentAmmo = AmmoPerRound;
+    }
     void Start()
     {
         isAimOn = false;
         isReloading = false;
         currentFireStamp = 0;
-        currentAmmo = AmmoPerRound;
     }
     public bool CanBuyAmmo()
     {
@@ -56,12 +59,12 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
+        Flash.Play();
+        Smoke1.Play();
+        Smoke2.Play();
         RaycastHit shot;
         if(Physics.Raycast(FpsCam.transform.position, FpsCam.transform.forward, out shot, Range))
         {
-            Flash.Play();
-            Smoke1.Play();
-            Smoke2.Play();
             Enemy shotEnem = shot.transform.GetComponent<Enemy>();
             if (shotEnem != null)
             {
@@ -70,8 +73,8 @@ public class Gun : MonoBehaviour
             if (shot.rigidbody != null)
                 shot.rigidbody.AddForce(-shot.normal * ShotForce);
             Instantiate(OnShot, shot.point, Quaternion.LookRotation(shot.normal));
-            currentAmmo--;
         }
+        currentAmmo--;
     }
     IEnumerator Reload()
     {

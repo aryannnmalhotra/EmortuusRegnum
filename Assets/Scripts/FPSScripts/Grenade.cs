@@ -18,7 +18,8 @@ public class Grenade : MonoBehaviour
     }
     void Explode()
     {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+        GameObject explosion = Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(explosion, 2);
         Collider[] nearerColliders = Physics.OverlapSphere(transform.position, explosionRadius / 2);
         {
             foreach(Collider nearer in nearerColliders)

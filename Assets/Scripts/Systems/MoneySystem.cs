@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneySystem : MonoBehaviour
 {
-    private int currentBalance = 2000;
+    private int currentBalance = 20000;
     public void Deduct(int amount)
     {
         currentBalance = Mathf.Clamp(currentBalance - amount, 0 , 100000);
