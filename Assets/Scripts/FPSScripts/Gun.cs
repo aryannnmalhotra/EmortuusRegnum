@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
     public bool IsSniper;
     public int AmmoPerRound = 5;
     public int ExtraRounds = 0;
+    public int MaxRounds = 10;
     public float ReloadTime = 2.5f;
     public float Damage = 10;
     public float Range = 30;
@@ -30,9 +31,25 @@ public class Gun : MonoBehaviour
         currentFireStamp = 0;
         currentAmmo = AmmoPerRound;
     }
+    public bool CanBuyAmmo()
+    {
+        if (ExtraRounds == MaxRounds - 1)
+            return false;
+        else
+            return true;
+    }
+    public void BuyAmmo()
+    {
+        ExtraRounds = Mathf.Clamp(ExtraRounds + 1, 0, MaxRounds);
+    }
+    public int GetCurrentAmmo()
+    {
+        return currentAmmo;
+    }
     private void OnEnable()
     {
         isAimOn = false;
+        Crosshair.SetActive(false);
         anim = GetComponent<Animator>();
         isReloading = false;
         anim.SetBool("Reload", false);
