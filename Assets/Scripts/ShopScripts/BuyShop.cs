@@ -6,16 +6,20 @@ public class BuyShop : MonoBehaviour
 {
     private bool isAtShop;
     private bool isShopping;
+    public GameObject Crosshair;
     public GameObject HUDPanel;
     public GameObject ShopPanel;
     public GameObject WeaponsCam;
     public FpsController Rotation;
     public FpsMovement Translation;
+    public InventorySystem Inventory;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Inventory.enabled = false;
             WeaponsCam.SetActive(false);
+            Crosshair.SetActive(false);
             HUDPanel.SetActive(true);
             isAtShop = true;
         }
@@ -24,6 +28,7 @@ public class BuyShop : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Inventory.enabled = true;
             WeaponsCam.SetActive(true);
             HUDPanel.SetActive(false);
             isAtShop = false;

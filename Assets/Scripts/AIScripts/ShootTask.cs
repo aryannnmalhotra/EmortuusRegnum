@@ -13,9 +13,8 @@ public class ShootTask : Task
     private ParticleSystem smoke1;
     private ParticleSystem smoke2;
     private float shotDamage;
-    private bool isFiringAgain;
     private float aimTime;
-    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2, float shotDamage, bool isFiringAgain) : base(taskManager)
+    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2, float shotDamage) : base(taskManager)
     {
         this.anim = anim;
         this.navAgent = navAgent;
@@ -25,7 +24,6 @@ public class ShootTask : Task
         this.smoke1 = smoke1;
         this.smoke2 = smoke2;
         this.shotDamage = shotDamage;
-        this.isFiringAgain = isFiringAgain;
         aimTime = Random.Range(0.5f, 1.5f);
     }
     public override bool Start()
@@ -33,12 +31,9 @@ public class ShootTask : Task
         navAgent.ResetPath();
         navAgent.speed = 0;
         navAgent.isStopped = true;
-        if (isFiringAgain)
-        {
-            var direction = (TaskManager.gameObject.transform.position - target).normalized;
-            Quaternion directionalRotaion = Quaternion.LookRotation(-(new Vector3(direction.x, 0, direction.z)));
-            TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1);
-        }
+        var direction = (TaskManager.gameObject.transform.position - target).normalized;
+        Quaternion directionalRotaion = Quaternion.LookRotation(-(new Vector3(direction.x, 0, direction.z)));
+        TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1);
         anim.SetBool("Aim", true);
         TaskManager.StartCoroutine(StartShooting());
         return true;

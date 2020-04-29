@@ -10,7 +10,6 @@ public class FpsAttributes : MonoBehaviour
     void Start()
     {
         healthSystem = GetComponent<HealthSystem>();
-        armourSystem = GetComponent<ArmourSystem>();
         IsAlive = true;
     }
     void Update()

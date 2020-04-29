@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ItemScroll : MonoBehaviour
 {
     private int currentItem;
+    public int MaxIndex;
     void Start()
     {
         currentItem = 0;
@@ -28,7 +29,7 @@ public class ItemScroll : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (currentItem < 6)
+            if (currentItem < MaxIndex)
                 currentItem++;
             else
                 currentItem = 0;
@@ -39,7 +40,7 @@ public class ItemScroll : MonoBehaviour
             if (currentItem > 0)
                 currentItem--;
             else
-                currentItem = 6;
+                currentItem = MaxIndex;
             SelectItem();
         }
     }

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     private bool isActive;
-    private bool isFiringAgain;
     private HealthSystem healthSystem;
     private Animator anim;
     private NavMeshAgent navAgent;
@@ -26,7 +25,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         isActive = false;
-        isFiringAgain = false;
         healthSystem = GetComponent<HealthSystem>();
         anim = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
@@ -74,12 +72,10 @@ public class Enemy : MonoBehaviour
                 if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
                 {
                     taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
-                    isFiringAgain = false;
                 }
                 if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
                 {
-                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage, isFiringAgain));
-                    isFiringAgain = true;
+                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
                 }
             }
             if (healthSystem.GetHealth() <= 0)
