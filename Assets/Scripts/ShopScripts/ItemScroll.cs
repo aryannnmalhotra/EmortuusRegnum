@@ -6,7 +6,7 @@ public class ItemScroll : MonoBehaviour
 {
     private int currentItem;
     public int MaxIndex;
-    void Start()
+    void OnEnable()
     {
         currentItem = 0;
         SelectItem();

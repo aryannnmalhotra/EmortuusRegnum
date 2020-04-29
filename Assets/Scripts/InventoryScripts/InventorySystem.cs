@@ -10,9 +10,14 @@ public class InventorySystem : MonoBehaviour
     public GameObject WeaponsCam;
     public FpsController Rotation;
     public FpsMovement Translation;
+    public ArmourSystem PlayerArmour;
     void Start()
     {
         isDisplaying = false;
+    }
+    public bool GetIsDisplaying()
+    {
+        return isDisplaying;
     }
     void Update()
     {
@@ -29,7 +34,8 @@ public class InventorySystem : MonoBehaviour
             }
             else
             {
-                WeaponsCam.SetActive(true);
+                if (!PlayerArmour.IsMending)
+                    WeaponsCam.SetActive(true);
                 Rotation.enabled = true;
                 Translation.enabled = true;
                 InventoryPanel.SetActive(false);

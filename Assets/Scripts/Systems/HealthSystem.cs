@@ -16,12 +16,12 @@ public class HealthSystem : MonoBehaviour
     public void IncreaseHealth(float factor)
     {
         health = Mathf.Clamp(health + factor, 0, 100);
-        Healthbar.rectTransform.localScale = new Vector3(health / 100, 1, 1);
+        Healthbar.fillAmount = health / 100;
     }
     public void DecreaseHealth(float factor)
     {
         health = Mathf.Clamp(health - factor, 0, 100);
-        Healthbar.rectTransform.localScale = new Vector3(health / 100, 1, 1);
+        Healthbar.fillAmount = health / 100;
     }
     public void BuyHealthkit()
     {
@@ -31,7 +31,7 @@ public class HealthSystem : MonoBehaviour
     {
         health = Mathf.Clamp(health + 70, 0, 100);
         healthKitCount = Mathf.Clamp(healthKitCount - 1, 0, MaxHealthkitCount);
-        Healthbar.rectTransform.localScale = new Vector3(health / 100, 1, 1);
+        Healthbar.fillAmount = health / 100;
     }
     public int GetHealthkitCount()
     {

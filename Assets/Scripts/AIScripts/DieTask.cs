@@ -18,7 +18,7 @@ public class DieTask : Task
     }
     IEnumerator SpawnCollectibles()
     {
-        yield return new WaitForSeconds(3.9f);
+        yield return new WaitForSeconds(4.9f);
         // spawn logic
         yield return new WaitForSeconds(0.1f);
         TaskManager.Destroy(TaskManager.gameObject);
