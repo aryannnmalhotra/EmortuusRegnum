@@ -8,10 +8,7 @@ public class ArmourInv : MonoBehaviour
     public Text Details;
     private void OnEnable()
     {
-        if (PlayerArmour.GetArmourLevelState() == 0)
-            Details.text = "BROKEN";
-        else
-            Details.text = "INTACT";
+        Details.text = "Level : " + PlayerArmour.GetArmourLevel().ToString();
     }
     void Update()
     {
@@ -20,9 +17,5 @@ public class ArmourInv : MonoBehaviour
             if (PlayerArmour.GetArmourLevelState() == 0)
                 PlayerArmour.MendArmour();
         }
-        if (PlayerArmour.GetArmourLevelState() == 0)
-            Details.text = "BROKEN";
-        else
-            Details.text = "INTACT";
     }
 }

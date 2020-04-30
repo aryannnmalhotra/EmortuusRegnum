@@ -5,9 +5,11 @@ using UnityEngine;
 public class DieTask : Task
 {
     Animator anim;
-    public DieTask(TaskManager taskManager, Animator anim) : base(taskManager)
+    private GameObject dieEffect;
+    public DieTask(TaskManager taskManager, Animator anim, GameObject dieEffect) : base(taskManager)
     {
         this.anim = anim;
+        this.dieEffect = dieEffect;
     }
     public override bool Start()
     {
@@ -19,6 +21,7 @@ public class DieTask : Task
     IEnumerator SpawnCollectibles()
     {
         yield return new WaitForSeconds(4.9f);
+        TaskManager.Instantiate(dieEffect, TaskManager.gameObject.transform.position, Quaternion.LookRotation(Vector3.up));
         // spawn logic
         yield return new WaitForSeconds(0.1f);
         TaskManager.Destroy(TaskManager.gameObject);

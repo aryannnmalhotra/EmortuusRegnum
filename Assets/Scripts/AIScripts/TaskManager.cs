@@ -6,6 +6,7 @@ public class TaskManager : MonoBehaviour
 {
     private Queue<Task> pendingTasks = new Queue<Task>();
     private Task currentTask = null;
+    public bool IsShooting = false;
     private void Start()
     {
         StartTask(new Task(this));

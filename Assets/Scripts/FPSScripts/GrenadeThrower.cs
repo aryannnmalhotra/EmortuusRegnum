@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GrenadeThrower : MonoBehaviour
 {
     private int currentGrenadeCount;
     public int MaxGrenadeCount = 20;
     public float ThrowForce = 16;
     public GameObject Grenade;
+    public Text GrenadeUI;
     void Start()
     {
         currentGrenadeCount = MaxGrenadeCount;
+        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     public bool CanBuyGrenade()
     {
@@ -18,6 +20,10 @@ public class GrenadeThrower : MonoBehaviour
             return false;
         else
             return true;
+    }
+    private void OnEnable()
+    {
+        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     public void BuyGrenade()
     {
@@ -33,10 +39,11 @@ public class GrenadeThrower : MonoBehaviour
         Rigidbody rb = ThrownGrenade.GetComponent<Rigidbody>();
         rb.AddForce((ThrownGrenade.transform.forward * ThrowForce), ForceMode.VelocityChange);
         currentGrenadeCount--;
+        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     void Update()
     {
-        if (currentGrenadeCount >= 0)
+        if (currentGrenadeCount > 0)
         {
             if (Input.GetKeyDown(KeyCode.G))
             {

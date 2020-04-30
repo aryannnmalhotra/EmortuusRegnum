@@ -16,10 +16,14 @@ public class ChaseTask : Task
     }
     public override bool Start()
     {
+        TaskManager.IsShooting = false;
         anim.SetBool("Aim", false);
         navAgent.isStopped = false;
         navAgent.speed = 5;
         navAgent.SetDestination(destination);
+        var direction = (TaskManager.gameObject.transform.position - destination).normalized;
+        Quaternion directionalRotaion = Quaternion.LookRotation(-(new Vector3(direction.x, 0, direction.z)));
+        TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1); TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1);
         return true;
     }
     public override bool End()

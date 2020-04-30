@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     private bool isActive;
-    private bool isChasing;
     private HealthSystem healthSystem;
     private Animator anim;
     private NavMeshAgent navAgent;
@@ -18,6 +17,7 @@ public class Enemy : MonoBehaviour
     public float EscapeRange = 16;
     public float PatrolRadius = 6;
     public GameObject Weapon;
+    public GameObject DieEffect;
     public Transform PlayerPosition;
     public Transform BulletOrigin;
     public ParticleSystem Flash;
@@ -72,20 +72,19 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
                 {
-                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage, isChasing));
-                    isChasing = false;
+                    FireRange = SpotRange - SpotRange / 5;
+                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
                 }
                 if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
                 {
                     taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
-                    isChasing = true;
                 }
             }
             if (healthSystem.GetHealth() <= 0)
             {
                 navAgent.ResetPath();
                 navAgent.isStopped = true;
-                taskManager.PriorityStartTask(new DieTask(taskManager, anim));
+                taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect));
             }
             else
                 isActive = false;

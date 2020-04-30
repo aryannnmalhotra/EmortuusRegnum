@@ -18,6 +18,7 @@ public class PatrolTask : Task
     }
     public  override bool Start()
     {
+        TaskManager.IsShooting = false;
         anim.SetBool("Aim", false);
         navAgent.isStopped = false;
         navAgent.speed = 1;

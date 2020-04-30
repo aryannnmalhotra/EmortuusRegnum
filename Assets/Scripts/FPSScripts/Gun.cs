@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Gun : MonoBehaviour
 {
     private bool isAimOn;
@@ -24,6 +24,7 @@ public class Gun : MonoBehaviour
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
+    public Text AmmoUI;
     private void Awake()
     {
         currentAmmo = AmmoPerRound;
@@ -56,6 +57,7 @@ public class Gun : MonoBehaviour
         anim = GetComponent<Animator>();
         isReloading = false;
         anim.SetBool("Reload", false);
+        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
     }
     void Shoot()
     {
@@ -75,6 +77,7 @@ public class Gun : MonoBehaviour
             Instantiate(OnShot, shot.point, Quaternion.LookRotation(shot.normal));
         }
         currentAmmo--;
+        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
     }
     IEnumerator Reload()
     {
@@ -85,6 +88,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         ExtraRounds--;
         currentAmmo = AmmoPerRound;
+        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
         isReloading = false;
     }
     void Update()

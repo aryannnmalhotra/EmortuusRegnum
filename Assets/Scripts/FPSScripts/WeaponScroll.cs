@@ -20,7 +20,10 @@ public class WeaponScroll : MonoBehaviour
                 weapon.gameObject.SetActive(true);
             }
             else
-                weapon.gameObject.SetActive(false);
+            {
+                if(i != 4)
+                    weapon.gameObject.SetActive(false);
+            }
             i++;
         }
     }
