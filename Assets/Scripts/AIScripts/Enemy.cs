@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
             if (healthSystem.GetHealth() <= 0 && isAlive)
             {
                 isAlive = false;
+                FpsAttributes.EnemyCount--;
                 navAgent.ResetPath();
                 navAgent.isStopped = true;
                 taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect, CashDrop));

@@ -22,9 +22,9 @@ public class DieTask : Task
     }
     IEnumerator SpawnCollectibles()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(4);
         TaskManager.Instantiate(dieEffect, TaskManager.gameObject.transform.position, Quaternion.LookRotation(Vector3.up));
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(0.4f);
         var go = TaskManager.Instantiate(cashDrop) as GameObject;
         go.transform.position = new Vector3(TaskManager.gameObject.transform.position.x, TaskManager.gameObject.transform.position.y + 1, TaskManager.gameObject.transform.position.z);
         yield return new WaitForSeconds(0.1f);

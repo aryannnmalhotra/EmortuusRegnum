@@ -12,7 +12,7 @@ public class GrenadeThrower : MonoBehaviour
     void Start()
     {
         currentGrenadeCount = MaxGrenadeCount;
-        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
+        GrenadeUI.text = "GRENADES : " + currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     public bool CanBuyGrenade()
     {
@@ -23,7 +23,7 @@ public class GrenadeThrower : MonoBehaviour
     }
     private void OnEnable()
     {
-        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
+        GrenadeUI.text = "GRENADES : " + currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     public void BuyGrenade()
     {
@@ -39,7 +39,7 @@ public class GrenadeThrower : MonoBehaviour
         Rigidbody rb = ThrownGrenade.GetComponent<Rigidbody>();
         rb.AddForce((ThrownGrenade.transform.forward * ThrowForce), ForceMode.VelocityChange);
         currentGrenadeCount--;
-        GrenadeUI.text = currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
+        GrenadeUI.text = "GRENADES : " + currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     void Update()
     {

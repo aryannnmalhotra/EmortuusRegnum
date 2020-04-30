@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 public class Scope : MonoBehaviour
 {
     private bool isScoped;
@@ -9,7 +8,6 @@ public class Scope : MonoBehaviour
     public GameObject ScopeImage;
     public GameObject WeaponsCam;
     public Camera FpsCam;
-    public Canvas UI;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -17,7 +15,6 @@ public class Scope : MonoBehaviour
     }
     private void OnDisable()
     {
-        UI.enabled = true;
         isScoped = false;
         WeaponsCam.GetComponent<Camera>().enabled = true;
         ScopeImage.SetActive(false);
@@ -25,7 +22,6 @@ public class Scope : MonoBehaviour
     }
     void ScopeActive()
     {
-        UI.enabled = false;
         ScopeImage.SetActive(true);
         WeaponsCam.GetComponent<Camera>().enabled = false;
         FpsCam.fieldOfView = 28;
@@ -47,7 +43,6 @@ public class Scope : MonoBehaviour
                 ScopeImage.SetActive(false);
                 FpsCam.fieldOfView = 60;
                 isScoped = false;
-                UI.enabled = true;
             }
         }
         if (isScoped)

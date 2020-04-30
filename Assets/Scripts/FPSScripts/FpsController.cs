@@ -7,6 +7,10 @@ public class FpsController : MonoBehaviour
     private float xRotation = 0;
     public float MouseSensitivity = 100;
     public Transform PlayerBody;
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
