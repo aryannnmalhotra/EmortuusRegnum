@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
+    private bool isAlive = true;
     private bool isActive;
     private HealthSystem healthSystem;
     private Animator anim;
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     public float PatrolRadius = 6;
     public GameObject Weapon;
     public GameObject DieEffect;
+    public GameObject CashDrop;
     public Transform PlayerPosition;
     public Transform BulletOrigin;
     public ParticleSystem Flash;
@@ -35,16 +37,19 @@ public class Enemy : MonoBehaviour
     }
     void PatrolCall()
     {
-        if (!isActive)
+        if (healthSystem.GetHealth() > 0)
         {
-            float xToAdd = Random.Range(-PatrolRadius, PatrolRadius);
-            float zToAdd = Random.Range(-PatrolRadius, PatrolRadius);
-            if (xToAdd >= -1.5f && xToAdd <= 1.5f)
-                xToAdd *= 3;
-            if (zToAdd >= -1.5f && zToAdd <= 1.5f)
-                zToAdd *= 3;
-            Vector3 patrolPoint = startPosition + new Vector3(xToAdd, 0, -(zToAdd));
-            taskManager.StartTask(new PatrolTask(taskManager, anim, navAgent, patrolPoint));
+            if (!isActive)
+            {
+                float xToAdd = Random.Range(-PatrolRadius, PatrolRadius);
+                float zToAdd = Random.Range(-PatrolRadius, PatrolRadius);
+                if (xToAdd >= -1.5f && xToAdd <= 1.5f)
+                    xToAdd *= 3;
+                if (zToAdd >= -1.5f && zToAdd <= 1.5f)
+                    zToAdd *= 3;
+                Vector3 patrolPoint = startPosition + new Vector3(xToAdd, 0, -(zToAdd));
+                taskManager.StartTask(new PatrolTask(taskManager, anim, navAgent, patrolPoint));
+            }
         }
     }
     public void DamageInflicted(float damage)
@@ -61,30 +66,34 @@ public class Enemy : MonoBehaviour
         anim.SetFloat("WalkSpeed", navAgent.velocity.magnitude);
         if (FpsAttributes.IsAlive)
         {
-            if (Vector3.Distance(transform.position, PlayerPosition.position) <= SpotRange && !isActive)
+            if (healthSystem.GetHealth() > 0)
             {
-                isActive = true;
-                navAgent.ResetPath();
-            }
-            if (Vector3.Distance(transform.position, PlayerPosition.position) > EscapeRange && isActive)
-                isActive = false;
-            if (isActive)
-            {
-                if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
+                if (Vector3.Distance(transform.position, PlayerPosition.position) <= SpotRange && !isActive)
                 {
-                    FireRange = SpotRange - SpotRange / 5;
-                    taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
+                    isActive = true;
+                    navAgent.ResetPath();
                 }
-                if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
+                if (Vector3.Distance(transform.position, PlayerPosition.position) > EscapeRange && isActive)
+                    isActive = false;
+                if (isActive)
                 {
-                    taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
+                    if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
+                    {
+                        FireRange = SpotRange - SpotRange / 5;
+                        taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
+                    }
+                    if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
+                    {
+                        taskManager.StartTask(new ChaseTask(taskManager, anim, navAgent, PlayerPosition.position));
+                    }
                 }
             }
-            if (healthSystem.GetHealth() <= 0)
+            if (healthSystem.GetHealth() <= 0 && isAlive)
             {
+                isAlive = false;
                 navAgent.ResetPath();
                 navAgent.isStopped = true;
-                taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect));
+                taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect, CashDrop));
             }
             else
                 isActive = false;

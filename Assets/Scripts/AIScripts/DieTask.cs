@@ -6,10 +6,12 @@ public class DieTask : Task
 {
     Animator anim;
     private GameObject dieEffect;
-    public DieTask(TaskManager taskManager, Animator anim, GameObject dieEffect) : base(taskManager)
+    private GameObject cashDrop;
+    public DieTask(TaskManager taskManager, Animator anim, GameObject dieEffect, GameObject cashDrop) : base(taskManager)
     {
         this.anim = anim;
         this.dieEffect = dieEffect;
+        this.cashDrop = cashDrop;
     }
     public override bool Start()
     {
@@ -20,9 +22,11 @@ public class DieTask : Task
     }
     IEnumerator SpawnCollectibles()
     {
-        yield return new WaitForSeconds(4.9f);
+        yield return new WaitForSeconds(3.5f);
         TaskManager.Instantiate(dieEffect, TaskManager.gameObject.transform.position, Quaternion.LookRotation(Vector3.up));
-        // spawn logic
+        yield return new WaitForSeconds(1.4f);
+        var go = TaskManager.Instantiate(cashDrop) as GameObject;
+        go.transform.position = new Vector3(TaskManager.gameObject.transform.position.x, TaskManager.gameObject.transform.position.y + 1, TaskManager.gameObject.transform.position.z);
         yield return new WaitForSeconds(0.1f);
         TaskManager.Destroy(TaskManager.gameObject);
     }

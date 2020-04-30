@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - WeaponsController
+  - Rifle
+  - Pistol
+  - Sniper
+  - Heavy
   layers:
   - Default
   - TransparentFX
