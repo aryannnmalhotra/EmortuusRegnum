@@ -58,7 +58,7 @@ public class ArmourSystem : MonoBehaviour
         armourLevel = Mathf.Clamp(armourLevel + 1, 0, 10);
         armourLevelState = armourLevel;
         ArmourUI.text = "INTACT";
-        upgradeCost = Mathf.Clamp(upgradeCost + 5000, 0, 50000);
+        upgradeCost = Mathf.Clamp(upgradeCost + 2000, 0, 50000);
         mendTime = Mathf.Clamp(mendTime + 1, 0, 10);
         hitLimit = Mathf.Clamp(hitLimit + 2, 0, 20);
     }
