@@ -9,6 +9,7 @@ public class BuyShop : MonoBehaviour
     public GameObject Crosshair;
     public GameObject HUDPanel;
     public GameObject ShopPanel;
+    public GameObject EnemyCountHUD;
     public GameObject WeaponsCam;
     public FpsController Rotation;
     public FpsMovement Translation;
@@ -49,6 +50,7 @@ public class BuyShop : MonoBehaviour
                 {
                     HUDPanel.SetActive(false);
                     ShopPanel.SetActive(true);
+                    EnemyCountHUD.SetActive(false);
                     Rotation.enabled = false;
                     Translation.enabled = false;
                     isShopping = true;
@@ -60,6 +62,7 @@ public class BuyShop : MonoBehaviour
                 {
                     HUDPanel.SetActive(true);
                     ShopPanel.SetActive(false);
+                    EnemyCountHUD.SetActive(true);
                     Rotation.enabled = true;
                     Translation.enabled = true;
                     isShopping = false;
