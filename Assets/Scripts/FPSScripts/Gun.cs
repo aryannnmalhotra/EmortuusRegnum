@@ -61,6 +61,8 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
+        anim.SetBool("Shoot", true);
+        Invoke("ShootReset", 0.1f);
         Flash.Play();
         Smoke1.Play();
         Smoke2.Play();
@@ -78,6 +80,10 @@ public class Gun : MonoBehaviour
         }
         currentAmmo--;
         AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
+    }
+    void ShootReset()
+    {
+        anim.SetBool("Shoot", false);
     }
     IEnumerator Reload()
     {
