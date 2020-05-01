@@ -54,12 +54,15 @@ public class Enemy : MonoBehaviour
     }
     public void DamageInflicted(float damage)
     {
-        navAgent.ResetPath();
-        navAgent.isStopped = true;
-        if(IsWeakerEnem)
-            taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage * 2));
-        else
-            taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage));
+        if (healthSystem.GetHealth() > 0)
+        {
+            navAgent.ResetPath();
+            navAgent.isStopped = true;
+            if (IsWeakerEnem)
+                taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage * 2));
+            else
+                taskManager.PriorityStartTask(new HurtTask(taskManager, anim, healthSystem, damage));
+        }
     }
     void Update()
     {

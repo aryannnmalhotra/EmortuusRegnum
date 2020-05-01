@@ -37,4 +37,8 @@ public class HealthSystem : MonoBehaviour
     {
         return healthKitCount;
     }
+    private void Start()
+    {
+        healthKitCount = MaxHealthkitCount;
+    }
 }

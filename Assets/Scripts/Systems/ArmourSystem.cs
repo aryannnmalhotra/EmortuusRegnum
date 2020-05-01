@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ArmourSystem : MonoBehaviour
 {
-    private int armourLevel = 0;
+    private int armourLevel = 1;
     private int armourLevelState;
     private int upgradeCost = 5000;
     private int mendTime = 1;
@@ -64,7 +64,7 @@ public class ArmourSystem : MonoBehaviour
     }
     private void Start()
     {
-        ArmourUI.text = "NONE";
+        ArmourUI.text = "INTACT";
         WeaponsCam.SetActive(false);
         WeaponsCam.SetActive(true);
     }

@@ -16,7 +16,6 @@ public class DieTask : Task
     public override bool Start()
     {
         anim.SetBool("Die", true);
-        TaskManager.gameObject.GetComponent<BoxCollider>().enabled = false;
         TaskManager.StartCoroutine(SpawnCollectibles());
         return true;
     }
