@@ -64,6 +64,7 @@ public class ArmourSystem : MonoBehaviour
     }
     private void Start()
     {
+        armourLevelState = armourLevel;
         ArmourUI.text = "INTACT";
         WeaponsCam.SetActive(false);
         WeaponsCam.SetActive(true);
