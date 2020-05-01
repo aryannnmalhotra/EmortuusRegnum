@@ -6,6 +6,9 @@ public class WellScript : MonoBehaviour
     public GameObject MainUI;
     public GameObject ObjectiveAchievedPanel;
     public GameObject WeaponsCam;
+    public ParticleSystem Smoke;
+    public ParticleSystem Flash;
+    public ParticleSystem Flame;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -15,6 +18,9 @@ public class WellScript : MonoBehaviour
                 MainUI.SetActive(false);
                 WeaponsCam.SetActive(false);
                 ObjectiveAchievedPanel.SetActive(true);
+                Smoke.Play();
+                Flash.Play();
+                Flame.Play();
             }
         }
     }
