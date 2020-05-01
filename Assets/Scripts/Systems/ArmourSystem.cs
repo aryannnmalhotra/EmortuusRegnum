@@ -65,5 +65,7 @@ public class ArmourSystem : MonoBehaviour
     private void Start()
     {
         ArmourUI.text = "NONE";
+        WeaponsCam.SetActive(false);
+        WeaponsCam.SetActive(true);
     }
 }

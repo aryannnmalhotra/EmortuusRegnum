@@ -15,7 +15,7 @@ public class FpsMovement : MonoBehaviour
     public LayerMask GroundMask;
     void Start() 
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {

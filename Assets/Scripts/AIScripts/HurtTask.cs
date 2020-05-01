@@ -25,7 +25,6 @@ public class HurtTask : Task
         yield return new WaitForSeconds(0.8f);
         anim.SetBool("Hurt", false);
         IsTaskComplete = true;
-        TaskManager.OnTaskCompleted(this);
     }
     public override bool End()
     {

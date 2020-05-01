@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GrenadeThrower : MonoBehaviour
 {
     private int currentGrenadeCount;
-    public int MaxGrenadeCount = 20;
+    public int MaxGrenadeCount = 10;
     public float ThrowForce = 16;
     public GameObject Grenade;
     public Text GrenadeUI;

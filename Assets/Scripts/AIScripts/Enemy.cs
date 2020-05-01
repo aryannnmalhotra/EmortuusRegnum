@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
                     if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
                     {
                         FireRange = SpotRange - SpotRange / 5;
-                        taskManager.StartTaskWithoutQueue(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
+                        taskManager.StartTask(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
                     }
                     if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
                     {

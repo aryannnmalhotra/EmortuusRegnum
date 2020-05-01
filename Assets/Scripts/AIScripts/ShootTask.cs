@@ -31,18 +31,9 @@ public class ShootTask : Task
         navAgent.ResetPath();
         navAgent.speed = 0;
         navAgent.isStopped = true;
-        if (TaskManager.IsShooting)
-        {
             var direction = (TaskManager.gameObject.transform.position - target).normalized;
             Quaternion directionalRotaion = Quaternion.LookRotation(-(new Vector3(direction.x, 0, direction.z)));
             TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1);
-        }
-        /*else
-        {
-            var direction = (TaskManager.gameObject.transform.position - target).normalized;
-            Quaternion directionalRotaion = Quaternion.LookRotation((new Vector3(direction.x, 0, direction.z)));
-            TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1); TaskManager.gameObject.transform.rotation = Quaternion.Slerp(TaskManager.gameObject.transform.rotation, directionalRotaion, 1);
-        }*/
         anim.SetBool("Aim", true);
         TaskManager.StartCoroutine(StartShooting());
         return true;
@@ -50,8 +41,6 @@ public class ShootTask : Task
     IEnumerator StartShooting()
     {
         yield return new WaitForSeconds(aimTime);
-        if (TaskManager.IsShooting)
-        {
             RaycastHit shot;
             if (!TaskManager.gameObject.GetComponent<Enemy>().IsWeakerEnem)
                 anim.SetBool("Fire", true);
@@ -67,18 +56,13 @@ public class ShootTask : Task
                     shot.transform.GetComponent<HealthSystem>().DecreaseHealth(shotDamage - (armourFactor * ((7 * shotDamage) / 100)));
                 }
             }
-        }
         yield return new WaitForSeconds(0.5f);
-        if (TaskManager.IsShooting)
-        {
             if (!TaskManager.gameObject.GetComponent<Enemy>().IsWeakerEnem)
                 anim.SetBool("Fire", false);
             flash.Stop();
             smoke1.Stop();
             smoke2.Stop();
-        }
         IsTaskComplete = true;
-        TaskManager.IsShooting = true;
     }
     public override bool End()
     {

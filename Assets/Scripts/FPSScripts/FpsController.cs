@@ -9,7 +9,7 @@ public class FpsController : MonoBehaviour
     public Transform PlayerBody;
     private void Start()
     {
-        Cursor.visible = false;
+
     }
     void Update()
     {
