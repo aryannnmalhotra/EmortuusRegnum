@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FpsAttributes : MonoBehaviour
 {
-    private bool eyesClosed = false;
     private HealthSystem healthSystem;
     private ArmourSystem armourSystem;
     private MoneySystem moneySystem;
@@ -12,7 +11,6 @@ public class FpsAttributes : MonoBehaviour
     private InventorySystem inventory;
     public Animator Anim;
     public Text EnemyCountUI;
-    public Image ClosingEyes;
     public FpsController Rotation;
     public GameObject WeaponsCam;
     public static int EnemyCount = 2;
@@ -25,10 +23,6 @@ public class FpsAttributes : MonoBehaviour
         translation = GetComponent<FpsMovement>();
         inventory = GetComponent<InventorySystem>();
         IsAlive = true;
-    }
-    void CloseEyes()
-    {
-        eyesClosed = true;
     }
     void Update()
     {
@@ -43,15 +37,10 @@ public class FpsAttributes : MonoBehaviour
             Rotation.enabled = false;
             WeaponsCam.SetActive(false);
             Anim.enabled = true;
-            Invoke("CloseEyes", 2);
         }
         if (IsAlive)
         {
             EnemyCountUI.text = "ENEMIES REMAINING : " + EnemyCount.ToString();
-        }
-        if (eyesClosed)
-        {
-            ClosingEyes.fillAmount = (50 / 100) * Time.deltaTime;
         }
     }
 }
