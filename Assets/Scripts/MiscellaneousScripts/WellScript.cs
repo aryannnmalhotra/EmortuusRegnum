@@ -21,6 +21,7 @@ public class WellScript : MonoBehaviour
                 Smoke.Play();
                 Flash.Play();
                 Flame.Play();
+                other.gameObject.GetComponent<FpsMovement>().enabled = false;
             }
         }
     }

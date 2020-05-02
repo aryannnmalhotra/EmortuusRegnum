@@ -42,7 +42,7 @@ public class BuyShop : MonoBehaviour
     }
     void Update()
     {
-        if (isAtShop)
+        if (isAtShop && FpsAttributes.IsAlive)
         {
             if (!isShopping)
             {
