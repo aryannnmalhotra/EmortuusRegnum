@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     private float currentFireStamp;
     private Animator anim;
+    private AudioSource soundPlayer;
     public bool IsSniper;
     public int AmmoPerRound = 5;
     public int ExtraRounds = 0;
@@ -24,6 +25,9 @@ public class Gun : MonoBehaviour
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
+    public AudioClip Reloading;
+    public AudioClip Shooting;
+    public AudioClip ReloadVoice;
     public Text AmmoUI;
     private void Awake()
     {
@@ -34,6 +38,7 @@ public class Gun : MonoBehaviour
         isAimOn = false;
         isReloading = false;
         currentFireStamp = 0;
+        soundPlayer = GetComponent<AudioSource>();
     }
     public bool CanBuyAmmo()
     {
@@ -54,8 +59,8 @@ public class Gun : MonoBehaviour
     {
         isAimOn = false;
         Crosshair.SetActive(false);
-        anim = GetComponent<Animator>();
         isReloading = false;
+        anim = GetComponent<Animator>();
         anim.SetBool("Reload", false);
         AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
     }
@@ -63,6 +68,7 @@ public class Gun : MonoBehaviour
     {
         anim.SetBool("Shoot", true);
         Invoke("ShootReset", 0.1f);
+        soundPlayer.PlayOneShot(Shooting);
         Flash.Play();
         Smoke1.Play();
         Smoke2.Play();
@@ -89,6 +95,9 @@ public class Gun : MonoBehaviour
     {
         isReloading = true;
         anim.SetBool("Reload", true);
+        soundPlayer.PlayOneShot(Reloading);
+        soundPlayer.PlayOneShot(ReloadVoice);
+        Invoke("StopReloading", ReloadTime);
         yield return new WaitForSeconds(ReloadTime - 0.25f);
         anim.SetBool("Reload", false);
         yield return new WaitForSeconds(0.25f);
@@ -96,6 +105,10 @@ public class Gun : MonoBehaviour
         currentAmmo = AmmoPerRound;
         AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
         isReloading = false;
+    }
+    void StopReloading()
+    {
+        soundPlayer.Stop();
     }
     void Update()
     {

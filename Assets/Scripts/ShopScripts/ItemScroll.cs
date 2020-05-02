@@ -5,9 +5,12 @@ using UnityEngine.UI;
 public class ItemScroll : MonoBehaviour
 {
     private int currentItem;
+    private AudioSource soundPlayer;
     public int MaxIndex;
+    public AudioClip Scroll;
     void OnEnable()
     {
+        soundPlayer = GetComponent<AudioSource>();
         currentItem = 0;
         SelectItem();
     }
@@ -19,6 +22,7 @@ public class ItemScroll : MonoBehaviour
             if (currentItem == i)
             {
                 item.gameObject.SetActive(true);
+                soundPlayer.PlayOneShot(Scroll);
             }
             else
                 item.gameObject.SetActive(false);

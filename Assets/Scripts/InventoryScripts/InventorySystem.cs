@@ -5,15 +5,18 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
     private bool isDisplaying;
+    private AudioSource soundPlayer;
     public GameObject InventoryPanel;
     public GameObject Crosshair;
     public GameObject WeaponsCam;
     public FpsController Rotation;
     public FpsMovement Translation;
     public ArmourSystem PlayerArmour;
+    public AudioClip Transition;
     void Start()
     {
         isDisplaying = false;
+        soundPlayer = GetComponent<AudioSource>();
     }
     public bool GetIsDisplaying()
     {
@@ -23,6 +26,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
+            soundPlayer.PlayOneShot(Transition);
             if (!isDisplaying)
             {
                 WeaponsCam.SetActive(false);

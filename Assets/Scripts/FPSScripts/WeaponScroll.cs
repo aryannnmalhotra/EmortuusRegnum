@@ -5,8 +5,11 @@ using UnityEngine;
 public class WeaponScroll : MonoBehaviour
 {
     private int currentWeapon;
+    private AudioSource soundPlayer;
+    public AudioClip WeaponSwitch;
     void Start()
     {
+        soundPlayer = GetComponent<AudioSource>();
         currentWeapon = 0;
         SelectWeapon();
     }
@@ -18,6 +21,7 @@ public class WeaponScroll : MonoBehaviour
             if (currentWeapon == i)
             {
                 weapon.gameObject.SetActive(true);
+                soundPlayer.PlayOneShot(WeaponSwitch);
             }
             else
             {

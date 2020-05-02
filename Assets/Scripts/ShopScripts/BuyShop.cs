@@ -6,6 +6,7 @@ public class BuyShop : MonoBehaviour
 {
     private bool isAtShop;
     private bool isShopping;
+    private AudioSource soundPlayer;
     public GameObject Crosshair;
     public GameObject HUDPanel;
     public GameObject ShopPanel;
@@ -14,6 +15,8 @@ public class BuyShop : MonoBehaviour
     public FpsController Rotation;
     public FpsMovement Translation;
     public InventorySystem Inventory;
+    public AudioClip InVicinity;
+    public AudioClip EnterExit;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -23,6 +26,7 @@ public class BuyShop : MonoBehaviour
             Crosshair.SetActive(false);
             HUDPanel.SetActive(true);
             isAtShop = true;
+            soundPlayer.PlayOneShot(InVicinity);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -33,12 +37,14 @@ public class BuyShop : MonoBehaviour
             WeaponsCam.SetActive(true);
             HUDPanel.SetActive(false);
             isAtShop = false;
+            soundPlayer.PlayOneShot(InVicinity);
         }
     }
     void Start()
     {
         isAtShop = false;
         isShopping = false;
+        soundPlayer = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -54,6 +60,7 @@ public class BuyShop : MonoBehaviour
                     Rotation.enabled = false;
                     Translation.enabled = false;
                     isShopping = true;
+                    soundPlayer.PlayOneShot(EnterExit);
                 }
             }
             else
@@ -66,6 +73,7 @@ public class BuyShop : MonoBehaviour
                     Rotation.enabled = true;
                     Translation.enabled = true;
                     isShopping = false;
+                    soundPlayer.PlayOneShot(EnterExit);
                 }
             }
         }

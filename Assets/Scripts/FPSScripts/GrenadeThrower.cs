@@ -5,13 +5,17 @@ using UnityEngine.UI;
 public class GrenadeThrower : MonoBehaviour
 {
     private int currentGrenadeCount;
+    private AudioSource soundPlayer;
     public int MaxGrenadeCount = 10;
     public float ThrowForce = 16;
     public GameObject Grenade;
+    public AudioClip Grunt;
+    public AudioClip Blast;
     public Text GrenadeUI;
     void Start()
     {
         currentGrenadeCount = MaxGrenadeCount;
+        soundPlayer = GetComponent<AudioSource>();
         GrenadeUI.text = "GRENADES : " + currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
     }
     public bool CanBuyGrenade()
@@ -35,11 +39,20 @@ public class GrenadeThrower : MonoBehaviour
     }
     void ThrowGrenade()
     {
+        soundPlayer.PlayOneShot(Grunt);
+        StartCoroutine(Blow());
         GameObject ThrownGrenade = Instantiate(Grenade, transform.position, transform.rotation);
         Rigidbody rb = ThrownGrenade.GetComponent<Rigidbody>();
         rb.AddForce((ThrownGrenade.transform.forward * ThrowForce), ForceMode.VelocityChange);
         currentGrenadeCount--;
         GrenadeUI.text = "GRENADES : " + currentGrenadeCount.ToString() + "/" + MaxGrenadeCount.ToString();
+    }
+    IEnumerator Blow()
+    {
+        yield return new WaitForSeconds(4);
+        soundPlayer.PlayOneShot(Blast);
+        yield return new WaitForSeconds(3);
+        soundPlayer.Stop();
     }
     void Update()
     {
