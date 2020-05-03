@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navAgent;
     private TaskManager taskManager;
     private Vector3 startPosition;
+    public AudioSource SoundPlayer;
     public bool IsWeakerEnem;
     public float ShotDamage = 10;
     public float SpotRange = 10;
@@ -25,6 +26,9 @@ public class Enemy : MonoBehaviour
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
+    public AudioClip FireSound;
+    public AudioClip Spotted;
+    public AudioClip EnemyDown;
     void Start()
     {
         isActive = false;
@@ -71,6 +75,7 @@ public class Enemy : MonoBehaviour
                 if (Vector3.Distance(transform.position, PlayerPosition.position) <= SpotRange && !isActive)
                 {
                     isActive = true;
+                    SoundPlayer.PlayOneShot(Spotted);
                     navAgent.ResetPath();
                 }
                 if (Vector3.Distance(transform.position, PlayerPosition.position) > EscapeRange && isActive)
@@ -80,7 +85,7 @@ public class Enemy : MonoBehaviour
                     if (Vector3.Distance(transform.position, PlayerPosition.position) <= FireRange)
                     {
                         FireRange = SpotRange - SpotRange / 5;
-                        taskManager.StartTask(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage));
+                        taskManager.StartTask(new ShootTask(taskManager, anim, navAgent, BulletOrigin.position, PlayerPosition.position, Flash, Smoke1, Smoke2, ShotDamage, SoundPlayer, FireSound));
                     }
                     if (Vector3.Distance(transform.position, PlayerPosition.position) > FireRange)
                     {
@@ -91,10 +96,9 @@ public class Enemy : MonoBehaviour
             if (healthSystem.GetHealth() <= 0 && isAlive)
             {
                 isAlive = false;
-                FpsAttributes.EnemyCount--;
                 navAgent.ResetPath();
                 navAgent.isStopped = true;
-                taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect, CashDrop));
+                taskManager.PriorityStartTask(new DieTask(taskManager, anim, DieEffect, CashDrop, SoundPlayer, EnemyDown));
             }
         }
         else

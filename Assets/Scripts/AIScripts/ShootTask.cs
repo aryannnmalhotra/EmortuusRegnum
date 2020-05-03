@@ -13,8 +13,10 @@ public class ShootTask : Task
     private ParticleSystem smoke1;
     private ParticleSystem smoke2;
     private float shotDamage;
+    private AudioSource soundPlayer;
+    private AudioClip fireSound;
     private float aimTime;
-    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2, float shotDamage) : base(taskManager)
+    public ShootTask(TaskManager taskManager, Animator anim, NavMeshAgent navAgent, Vector3 bulletOrigin, Vector3 target, ParticleSystem flash, ParticleSystem smoke1, ParticleSystem smoke2, float shotDamage, AudioSource soundPlayer, AudioClip fireSound) : base(taskManager)
     {
         this.anim = anim;
         this.navAgent = navAgent;
@@ -24,6 +26,8 @@ public class ShootTask : Task
         this.smoke1 = smoke1;
         this.smoke2 = smoke2;
         this.shotDamage = shotDamage;
+        this.soundPlayer = soundPlayer;
+        this.fireSound = fireSound;
         aimTime = Random.Range(0.5f, 1.5f);
     }
     public override bool Start()
@@ -47,6 +51,7 @@ public class ShootTask : Task
             flash.Play();
             smoke1.Play();
             smoke2.Play();
+            soundPlayer.PlayOneShot(fireSound);
             if (Physics.Raycast(bulletOrigin, -((bulletOrigin - target).normalized), out shot))
             {
                 if (shot.transform.GetComponent<FpsAttributes>() != null)

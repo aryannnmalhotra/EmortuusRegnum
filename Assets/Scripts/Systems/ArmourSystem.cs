@@ -13,6 +13,8 @@ public class ArmourSystem : MonoBehaviour
     public bool IsMending;
     public GameObject WeaponsCam;
     public Text ArmourUI;
+    public AudioSource SoundPlayer;
+    public AudioClip MendingArmour;
     public void TakeHit()
     {
         if (armourLevelState == armourLevel && armourLevel != 0)
@@ -34,9 +36,11 @@ public class ArmourSystem : MonoBehaviour
     IEnumerator Mending()
     {
         IsMending = true;
+        SoundPlayer.PlayOneShot(MendingArmour);
         yield return new WaitForSeconds(mendTime);
         armourLevelState = armourLevel;
         ArmourUI.text = "INTACT";
+        SoundPlayer.Stop();
         if(!GetComponent<InventorySystem>().GetIsDisplaying())
            WeaponsCam.SetActive(true);
         IsMending = false;

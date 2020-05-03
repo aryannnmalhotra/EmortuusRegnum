@@ -10,6 +10,7 @@ public class HealthSystem : MonoBehaviour
     private AudioSource soundPlayer;
     public int MaxHealthkitCount = 10;
     public AudioClip Hurt;
+    public AudioClip HealthkitUse;
     public Image Healthbar;
     public Image BloodImpact;
     public float GetHealth()
@@ -37,7 +38,8 @@ public class HealthSystem : MonoBehaviour
             color.a = ((100 - health) / 100) * 0.7f;
             BloodImpact.color = color;
         }
-        soundPlayer.PlayOneShot(Hurt);
+        if(!soundPlayer.isPlaying)
+            soundPlayer.PlayOneShot(Hurt);
     }
     public void BuyHealthkit()
     {
@@ -45,6 +47,7 @@ public class HealthSystem : MonoBehaviour
     }
     public void UseHealthKit()
     {
+        soundPlayer.PlayOneShot(HealthkitUse);
         health = Mathf.Clamp(health + 70, 0, 100);
         healthKitCount = Mathf.Clamp(healthKitCount - 1, 0, MaxHealthkitCount);
         Healthbar.fillAmount = health / 100;

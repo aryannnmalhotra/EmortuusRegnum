@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class WellScript : MonoBehaviour
 {
+    private AudioSource soundPlayer;
+    public AudioSource SoundPlayer;
+    public AudioSource SoundPlayer2;
     public GameObject MainUI;
     public GameObject ObjectiveAchievedPanel;
     public GameObject WeaponsCam;
@@ -22,7 +25,14 @@ public class WellScript : MonoBehaviour
                 Flash.Play();
                 Flame.Play();
                 other.gameObject.GetComponent<FpsMovement>().enabled = false;
+                SoundPlayer.Stop();
+                SoundPlayer2.Stop();
+                soundPlayer.Play();
             }
         }
+    }
+    private void Start()
+    {
+        soundPlayer = GetComponent<AudioSource>();
     }
 }

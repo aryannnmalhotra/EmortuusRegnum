@@ -51,8 +51,6 @@ public class GrenadeThrower : MonoBehaviour
     {
         yield return new WaitForSeconds(4);
         soundPlayer.PlayOneShot(Blast);
-        yield return new WaitForSeconds(3);
-        soundPlayer.Stop();
     }
     void Update()
     {

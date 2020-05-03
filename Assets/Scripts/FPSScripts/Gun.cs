@@ -28,6 +28,7 @@ public class Gun : MonoBehaviour
     public AudioClip Reloading;
     public AudioClip Shooting;
     public AudioClip ReloadVoice;
+    public AudioClip AimOn;
     public Text AmmoUI;
     private void Awake()
     {
@@ -127,6 +128,7 @@ public class Gun : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R) && !IsSniper)
         {
+            soundPlayer.PlayOneShot(AimOn);
             Crosshair.SetActive(!isAimOn);
             isAimOn = !isAimOn;
         }
