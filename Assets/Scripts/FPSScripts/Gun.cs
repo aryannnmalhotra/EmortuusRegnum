@@ -86,7 +86,7 @@ public class Gun : MonoBehaviour
             Instantiate(OnShot, shot.point, Quaternion.LookRotation(shot.normal));
         }
         currentAmmo--;
-        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
+        AmmoUI.text = "AMMO : " + currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
     }
     void ShootReset()
     {
@@ -104,7 +104,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         ExtraRounds--;
         currentAmmo = AmmoPerRound;
-        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
+        AmmoUI.text = "AMMO : " + currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
         isReloading = false;
     }
     void StopReloading()
