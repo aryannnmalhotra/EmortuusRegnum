@@ -4,7 +4,6 @@ using UnityEngine;
 public class WellScript : MonoBehaviour
 {
     private AudioSource soundPlayer;
-    public AudioSource SoundPlayer;
     public AudioSource SoundPlayer2;
     public GameObject MainUI;
     public GameObject ObjectiveAchievedPanel;
@@ -25,7 +24,7 @@ public class WellScript : MonoBehaviour
                 Flash.Play();
                 Flame.Play();
                 other.gameObject.GetComponent<FpsMovement>().enabled = false;
-                SoundPlayer.Stop();
+                other.gameObject.GetComponent<InventorySystem>().enabled = false;
                 SoundPlayer2.Stop();
                 soundPlayer.Play();
             }

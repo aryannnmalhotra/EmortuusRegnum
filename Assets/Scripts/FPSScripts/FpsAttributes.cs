@@ -13,6 +13,7 @@ public class FpsAttributes : MonoBehaviour
     public Text EnemyCountUI;
     public FpsController Rotation;
     public GameObject WeaponsCam;
+    public AudioSource Cinematic;
     public static int EnemyCount = 2;
     public static bool IsAlive;
     void Start()
@@ -41,6 +42,10 @@ public class FpsAttributes : MonoBehaviour
         if (IsAlive)
         {
             EnemyCountUI.text = "ENEMIES REMAINING : " + EnemyCount.ToString();
+        }
+        if(EnemyCount == 0)
+        {
+            Cinematic.Stop();
         }
     }
 }

@@ -38,8 +38,7 @@ public class HealthSystem : MonoBehaviour
             color.a = ((100 - health) / 100) * 0.7f;
             BloodImpact.color = color;
         }
-        if(!soundPlayer.isPlaying)
-            soundPlayer.PlayOneShot(Hurt);
+        soundPlayer.PlayOneShot(Hurt);
     }
     public void BuyHealthkit()
     {
