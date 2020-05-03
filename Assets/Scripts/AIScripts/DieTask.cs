@@ -27,7 +27,7 @@ public class DieTask : Task
     {
         yield return new WaitForSeconds(3);
         soundPlayer.PlayOneShot(enemyDown);
-        FpsAttributes.EnemyCount = Mathf.Clamp(FpsAttributes.EnemyCount - 1, 0, 50);
+        FpsAttributes.EnemyCount = Mathf.Clamp(FpsAttributes.EnemyCount - 1, 0, 100);
         yield return new WaitForSeconds(1);
         TaskManager.Instantiate(dieEffect, TaskManager.gameObject.transform.position, Quaternion.LookRotation(Vector3.up));
         yield return new WaitForSeconds(0.4f);

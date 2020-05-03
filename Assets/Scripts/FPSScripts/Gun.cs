@@ -63,7 +63,7 @@ public class Gun : MonoBehaviour
         isReloading = false;
         anim = GetComponent<Animator>();
         anim.SetBool("Reload", false);
-        AmmoUI.text = currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
+        AmmoUI.text = "AMMO : " + currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();
     }
     void Shoot()
     {

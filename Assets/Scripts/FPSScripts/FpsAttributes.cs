@@ -14,7 +14,7 @@ public class FpsAttributes : MonoBehaviour
     public FpsController Rotation;
     public GameObject WeaponsCam;
     public AudioSource Cinematic;
-    public static int EnemyCount = 2;
+    public static int EnemyCount = 100;
     public static bool IsAlive;
     void Start()
     {
