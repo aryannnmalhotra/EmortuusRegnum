@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
     public Camera FpsCam;
     public GameObject Crosshair;
     public GameObject OnShot;
+    public GameObject WeaponsCam;
     public ParticleSystem Flash;
     public ParticleSystem Smoke1;
     public ParticleSystem Smoke2;
@@ -95,6 +96,7 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        WeaponsCam.GetComponent<WeaponScroll>().enabled = false;
         anim.SetBool("Reload", true);
         soundPlayer.PlayOneShot(Reloading);
         soundPlayer.PlayOneShot(ReloadVoice);
@@ -102,6 +104,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(ReloadTime - 0.25f);
         anim.SetBool("Reload", false);
         yield return new WaitForSeconds(0.25f);
+        WeaponsCam.GetComponent<WeaponScroll>().enabled = true;
         ExtraRounds--;
         currentAmmo = AmmoPerRound;
         AmmoUI.text = "AMMO : " + currentAmmo.ToString() + "/" + ((ExtraRounds + 1) * AmmoPerRound).ToString();

@@ -8,7 +8,7 @@ public class ArmourInv : MonoBehaviour
     public Text Details;
     private void OnEnable()
     {
-        Details.text = "Level : " + PlayerArmour.GetArmourLevel().ToString();
+        Details.text = "MEND TIME : " + PlayerArmour.GetMendTime().ToString() + " SEC";
     }
     void Update()
     {
