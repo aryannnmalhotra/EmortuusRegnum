@@ -10,7 +10,7 @@ public class WeaponScroll : MonoBehaviour
     void Start()
     {
         soundPlayer = GetComponent<AudioSource>();
-        currentWeapon = 0;
+        currentWeapon = 1;
         SelectWeapon();
     }
     void SelectWeapon()
@@ -25,7 +25,7 @@ public class WeaponScroll : MonoBehaviour
             }
             else
             {
-                if(i != 4)
+                if(i != 0)
                     weapon.gameObject.SetActive(false);
             }
             i++;
@@ -35,18 +35,18 @@ public class WeaponScroll : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (currentWeapon < 3)
+            if (currentWeapon < 4)
                 currentWeapon++;
             else
-                currentWeapon = 0;
+                currentWeapon = 1;
             SelectWeapon();
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (currentWeapon > 0)
+            if (currentWeapon > 1)
                 currentWeapon--;
             else
-                currentWeapon = 3;
+                currentWeapon = 4;
             SelectWeapon();
         }
     }

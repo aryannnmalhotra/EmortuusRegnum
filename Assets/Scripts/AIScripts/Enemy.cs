@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour
     }
     void PatrolCall()
     {
+        if (healthSystem.GetHealth() > 0)
+        {
             if (!isActive)
             {
                 float xToAdd = Random.Range(-PatrolRadius, PatrolRadius);
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
                 Vector3 patrolPoint = startPosition + new Vector3(xToAdd, 0, -(zToAdd));
                 taskManager.StartTask(new PatrolTask(taskManager, anim, navAgent, patrolPoint));
             }
+        }
     }
     public void DamageInflicted(float damage)
     {
