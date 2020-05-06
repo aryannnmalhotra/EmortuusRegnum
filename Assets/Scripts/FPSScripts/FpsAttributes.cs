@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class FpsAttributes : MonoBehaviour
 {
     private HealthSystem healthSystem;
@@ -14,7 +15,7 @@ public class FpsAttributes : MonoBehaviour
     public FpsController Rotation;
     public GameObject WeaponsCam;
     public AudioSource Cinematic;
-    public static int EnemyCount = 100;
+    public static int EnemyCount;
     public static bool IsAlive;
     void Start()
     {
@@ -23,7 +24,12 @@ public class FpsAttributes : MonoBehaviour
         moneySystem = GetComponent<MoneySystem>();
         translation = GetComponent<FpsMovement>();
         inventory = GetComponent<InventorySystem>();
+        EnemyCount = 100;
         IsAlive = true;
+    }
+    private void SceneShift()
+    {
+        SceneManager.LoadScene("EndScene");
     }
     void Update()
     {
@@ -38,6 +44,7 @@ public class FpsAttributes : MonoBehaviour
             Rotation.enabled = false;
             WeaponsCam.SetActive(false);
             Anim.enabled = true;
+            Invoke("SceneShift", 3);
         }
         if (IsAlive)
         {

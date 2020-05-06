@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class WellScript : MonoBehaviour
 {
     private AudioSource soundPlayer;
@@ -27,8 +28,13 @@ public class WellScript : MonoBehaviour
                 other.gameObject.GetComponent<InventorySystem>().enabled = false;
                 SoundPlayer2.Stop();
                 soundPlayer.Play();
+                Invoke("SceneShift", 10);
             }
         }
+    }
+    private void SceneShift()
+    {
+        SceneManager.LoadScene("EndScene");
     }
     private void Start()
     {
