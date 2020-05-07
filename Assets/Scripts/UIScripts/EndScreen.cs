@@ -10,6 +10,7 @@ public class EndScreen : MonoBehaviour
     public AudioClip Button;
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         soundPlayer = GetComponent<AudioSource>();
         if (FpsAttributes.EnemyCount == 0)
             screenIndex = 0;
